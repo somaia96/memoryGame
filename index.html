@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .parent{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 80vh;
+            width: 70vw;
+            margin: 20px auto;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .parent .child{
+            align-content: space-between;
+            height: calc((100% - 20px) / 4);
+            flex-basis: calc((100% - 20px) / 5);
+            background-color: rgb(47, 165, 176);
+            border: 0.2vw solid rgb(61 182 255 / 48%);
+            font-size: 100px;
+            color: #fff;
+            position: relative;
+        }
+        .parent .child .pic{
+            transform: rotateY(180deg);
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .parent .child .pic img{
+            width: 100%;
+            position: absolute;
+            height: 100%;
+        }
+        .parent .child .signal{
+            transform:rotateY(0deg);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            background-color: rgb(47, 165, 176);
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+            align-items: center;
+            left: 0;
+            transition:all ease-in-out .3s;
+        }
+        .win {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            justify-content: center;
+            width: 40vw;
+            display: flex;
+            align-items: center;
+            height: 40vh;
+            font-size: 5vw;
+            transform: translate(-50%, -50%);
+            background-image: linear-gradient(45deg,#00fff1,#010104,#00ebff);
+            color: rgb(255, 255, 255);
+            z-index: 1;
+        }
+        .count{
+            font-size: 2vw;
+            position: absolute;
+            bottom: 20px;
+        }
+        .top{
+            width: 70vw;
+    height: 10vh;
+    background-color: #011f31;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2vw;
+    padding: 0 50px;
+        }
+    </style>
+    <div class="top">
+        <span class="name">Your Name : user</span>
+        <span class="failedTry">Failed Try : 0</span>
+    </div>
+    <div class="parent">
+    </div>
+    <script>
+        let user ="user";
+        window.onload=function(){
+
+        // create 20 picture div and add it to the page
+        for(let i =0;i<20;i++){
+        let childDiv =document.createElement("div");
+        let signalDiv =document.createElement("div");
+        let picDiv =document.createElement("div");
+        childDiv.className="child";
+        signalDiv.className="signal";
+        picDiv.className="pic";
+        let imgCreate =document.createElement("img");
+        imgCreate.src = `img/${newArr[i]}.jpg`;
+        let textSign = document.createTextNode("!");
+        picDiv.appendChild(imgCreate);
+        signalDiv.appendChild(textSign);
+        childDiv.appendChild(signalDiv);
+        childDiv.appendChild(picDiv);
+        document.querySelector(".parent").appendChild(childDiv);
+        }
+
+        // set user name
+        setTimeout(function(){
+            let user = prompt("Your Name");
+            if(user != null){
+        document.querySelector(".top .name").innerHTML=`Your Name : ${user}`;
+            }
+    },0)
+        }
+        let child = document.querySelector(".child");
+        let signal = document.querySelector(".signal");
+        let pic = document.querySelector(".pic");
+        let imgs = document.querySelectorAll(".pic img");
+
+        // put random pictures
+        let arr=[1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10];
+        let newArr =[];
+        for(let i =0;i<20;){
+            let num = Math.random()*10 + 1;
+            if(arr.includes(Math.floor(num))){
+                let slice =`${arr.splice(arr.indexOf(Math.floor(num)),1)}`;
+                newArr.push(slice);
+                i++;
+            }else{
+                continue;
+            }
+        }
+        let countFailedTry =0;
+            window.addEventListener("click",function(e){
+
+                // calc the open images
+                if(document.querySelectorAll(".open").length != 0){
+            let arrOfOpenImg = document.querySelectorAll(".open");
+        }
+
+        // open the picture
+            if(e.target.className == "signal"){
+            e.target.style.cssText ="transform: rotateY(180deg);z-index: -1;";
+            e.target.classList.add("open");
+            }
+                if(document.querySelectorAll(".open").length == 2){
+                    let arrOfOpenImg = document.querySelectorAll(".open");
+                    
+                    // count the failed tries
+                    if(arrOfOpenImg[0].nextElementSibling.firstElementChild.src != arrOfOpenImg[1].nextElementSibling.firstElementChild.src){
+                    countFailedTry++;
+                    document.querySelector(".top .failedTry").innerHTML=`Failed Try : ${countFailedTry}`;
+                    }
+                    arrOfOpenImg.forEach((e)=>{
+
+                        // add class done for same pictures
+                        if(arrOfOpenImg[0].nextElementSibling.firstElementChild.src == arrOfOpenImg[1].nextElementSibling.firstElementChild.src){
+                            e.classList.add("done");
+                        }else{
+
+                            // close the diffirint pictures
+                            setTimeout(function(){
+                            e.style.cssText ="transform: rotateY(0deg);z-index: 1;";
+                            },500)
+                        }
+
+                        // remove class open after two pictures
+                        e.classList.remove("open");
+                    })
+                }
+
+                // you win
+                if(document.querySelectorAll(".done").length == 20){
+                    let winDiv = document.createElement("div");
+                    winDiv.className = "win";
+                    let textWin = document.createTextNode("You Are Win");
+                    winDiv.appendChild(textWin);
+                    let countSpan =document.createElement("span");
+                    countSpan.className ="count";
+                    let counter = document.createTextNode(`Failed Try :${countFailedTry}`);
+                    countSpan.appendChild(counter);
+                    winDiv.appendChild(countSpan);
+                    document.body.appendChild(winDiv);
+                    console.log("done");
+                }
+            })
+    </script>
+</body>
+</html>
