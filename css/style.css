@@ -11,11 +11,11 @@ body{
     justify-content: space-between;
     height: 80vh;
     width: 70vw;
-    margin: 4vh auto;
+    margin:auto;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    top: 13vh;
+    transform: translate(-50%,0);
 }
 .parent .child{
     align-content: space-between;
@@ -92,6 +92,7 @@ padding: 0 50px;
         height: 7vh;
     }
     .parent{
-        height: 65vh;
+        height: 80vh;
+        top:8vh;
     }
 }
