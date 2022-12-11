@@ -90,8 +90,10 @@ padding: 0 50px;
 @media (max-width:767px) {
     .top{
         height: 7vh;
+width: 90vw;
     }
     .parent{
         top:8vh;
+width: 90vw;
     }
 }
