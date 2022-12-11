@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.parent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 80vh;
+    width: 70vw;
+    margin: 20px auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.parent .child{
+    align-content: space-between;
+    height: calc((100% - 20px) / 4);
+    flex-basis: calc((100% - 20px) / 5);
+    background-color: rgb(47, 165, 176);
+    border: 0.2vw solid rgb(61 182 255 / 48%);
+    font-size: 100px;
+    color: #fff;
+    position: relative;
+}
+.parent .child .pic{
+    transform: rotateY(180deg);
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.parent .child .pic img{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+}
+.parent .child .signal{
+    transform:rotateY(0deg);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgb(47, 165, 176);
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    align-items: center;
+    left: 0;
+    transition:all ease-in-out .3s;
+}
+.win {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    justify-content: center;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    height: 40vh;
+    font-size: 5vw;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(45deg,#00fff1,#010104,#00ebff);
+    color: rgb(255, 255, 255);
+    z-index: 1;
+}
+.count{
+    font-size: 2vw;
+    position: absolute;
+    bottom: 20px;
+}
+.top{
+    width: 70vw;
+height: 10vh;
+background-color: #011f31;
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+color: #fff;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 2vw;
+padding: 0 50px;
+}
