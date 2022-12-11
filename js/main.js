@@ -55,7 +55,6 @@ let user ="user";
 
         // open the picture
             if(e.target.className == "signal"){
-                setTimeout(function(){
              e.target.style.cssText ="transform: rotateY(180deg);z-index: -1;";
              e.target.classList.add("open");
             }
