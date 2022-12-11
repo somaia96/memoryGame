@@ -87,3 +87,11 @@ align-items: center;
 font-size: 2vw;
 padding: 0 50px;
 }
+@media (max-width:767px) {
+    .top{
+        height: 7vh;
+    }
+    .parent{
+        height: 65vh;
+    }
+}
